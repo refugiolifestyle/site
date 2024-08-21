@@ -4,6 +4,7 @@ import { LoaderCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import LightGallery from 'lightgallery/react';
+import Image from 'next/image';
 
 export default function FooterGallery() {
     const [fotos, setFotos] = useState<string[]>()
@@ -30,7 +31,7 @@ export default function FooterGallery() {
         {
             fotos.map((foto, i) => (
                 <a className={i >= 6 ? 'hidden' : ''} href={foto} key={`refugio-gallery-${++i}`}>
-                    <img alt={`Refúgio ${++i}`} src={foto} />
+                    <Image alt={`Refúgio ${++i}`} src={foto} />
                 </a>
             ))
         }

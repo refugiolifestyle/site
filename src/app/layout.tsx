@@ -8,6 +8,7 @@ import 'lightgallery/css/lg-zoom.css';
 import { SiGooglemaps, SiInstagram, SiSpotify, SiTiktok, SiYoutube } from "@icons-pack/react-simple-icons";
 import FooterGallery from "@/components/footer-gallery";
 import Menu from "@/components/menu";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
         <div className="w-full flex-1 flex flex-col items-start">
           <div className="w-full min-h-screen flex-1 flex flex-col">
             <div className="w-full flex flex-row items-center justify-between p-8">
-              <img src="/refugio.png" alt="Logo da Refúgio" className="w-36" />
+              <Image src="/refugio.png" alt="Logo da Refúgio" className="w-36" />
               <Menu />
             </div>
             <div className="flex-1 flex flex-row items-center p-10 gap-10">
@@ -52,7 +53,7 @@ export default function RootLayout({
           </div>
           <div className="w-full flex flex-col md:flex-row p-20 gap-10 lg:gap-28 bg-[#1b1b1b]">
             <div className="flex flex-1 flex-col gap-6">
-              <img src="/fire-white.png" alt="Foguinho da Refúgio" className="w-10" />
+              <Image src="/fire-white.png" alt="Foguinho da Refúgio" className="w-10" />
               <p className="text-justify text-white font-thin">
                 Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino.
               </p>

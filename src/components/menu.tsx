@@ -13,7 +13,7 @@ export default function Menu() {
     return <nav className="flex flex-row gap-4 text-white font-normal text-lg">
         {
             menus.map(menu => (
-                <a href={menu.href} className="hover:text-gray-400">
+                <a key={menu.titulo} href={menu.href} className="hover:text-gray-400">
                     {menu.titulo}
                     {
                         path === menu.href

@@ -33,12 +33,6 @@ export function FormCard({evento}: FormCardProps) {
     const [carregando, setCarregando] = useState(false)
     const form = useForm<z.infer<typeof formSchema>>({ resolver: zodResolver(formSchema) })
 
-    useEffect(() => {
-        if (form.formState.isDirty && !form.getFieldState('cpf').invalid) {
-            carregarDados()
-        }
-    }, [form.watch('cpf')])
-
     async function carregarDados() {
         let cpf = form.watch('cpf')
         alert(cpf)
