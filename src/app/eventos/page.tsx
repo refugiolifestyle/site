@@ -12,9 +12,9 @@ export default function Eventos() {
     <div className="h-1 w-24 my-4 bg-gradient-to-r from-[#ad1a1c] to-[#830b0c]" />
     <div className="evento">
       <video
-        loop
-        autoPlay
+        loop={true}
         muted={muted}
+        autoPlay={true}
         controls={false}
         className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-25">
         <source src="/conferencia2024/chamada.mp4" type="video/mp4" />
