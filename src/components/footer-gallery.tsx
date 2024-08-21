@@ -14,7 +14,12 @@ export default function FooterGallery() {
     }, [])
 
     const carregarFotos = async () => {
-        let response = await fetch('/api/footer-gallery')
+        let response = await fetch('/api/footer-gallery', {
+            cache: 'force-cache',
+            next: {
+                revalidate: 30 * 24 * 3600 // dia * horas * segundos
+            }
+        })
         let data = await response.json()
 
         setFotos(data.fotos)
@@ -30,8 +35,8 @@ export default function FooterGallery() {
         elementClassNames='grid grid-cols-3 gap-4'>
         {
             fotos.map((foto, i) => (
-                <a className={i >= 6 ? 'hidden' : ''} href={foto} key={`refugio-gallery-${++i}`}>
-                    <Image alt={`Refúgio ${++i}`} src={foto} />
+                <a className={`relative size-28 ${i >= 6 ? 'hidden' : ''}`} href={foto} key={`refugio-gallery-${++i}`}>
+                    <Image fill objectFit="contain" alt={`Refúgio ${++i}`} src={foto} />
                 </a>
             ))
         }

@@ -3,6 +3,8 @@ import Image from "next/image";
 export default function Home() {
   return <>
     <Image
+      fill
+      priority={true}
       src="/bg-layout.jpg"
       alt="Fundo com a logo da Conferência"
       className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-50" />

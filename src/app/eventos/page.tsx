@@ -28,7 +28,9 @@ export default function Eventos() {
         }
       </div>
       <a href="#" className=" cursor-pointer p-4 border border-white rounded-xl flex flex-row items-center gap-6 bg-neutral-700 bg-opacity-50 hover:bg-opacity-75">
-        <Image className="h-20" src="/conferencia2024/logo.png" alt="Logo conferencia 2024" />
+        <div className="relative size-20">
+          <Image fill objectFit="contain" src="/conferencia2024/logo.png" alt="Logo conferencia 2024" />
+        </div>
         <div className="flex flex-col">
           <h1 className="text-white text-2xl">Be Loud Conferência 2k24</h1>
           <h4 className="text-gray-300 font-light">Inscrições em breve</h4>
