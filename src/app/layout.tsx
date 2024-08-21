@@ -9,6 +9,7 @@ import { SiGooglemaps, SiInstagram, SiSpotify, SiTiktok, SiYoutube } from "@icon
 import FooterGallery from "@/components/footer-gallery";
 import Menu from "@/components/menu";
 import Image from "next/image";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <meta name="theme-color" content="#1b1b1b" />
+        <meta name="msapplication-navbutton-color" content="#fff" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#fff" />
+      </Head>
       <body className={cn('antialiased w-full min-h-screen flex', inter.className)}>
         <div className="w-full flex-1 flex flex-col items-start">
           <div className="w-full min-h-screen flex-1 flex flex-col">
