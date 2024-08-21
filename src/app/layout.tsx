@@ -27,13 +27,11 @@ export default function RootLayout({
       <body className={cn('antialiased w-full min-h-screen flex', inter.className)}>
         <div className="w-full flex-1 flex flex-col items-start">
           <div className="w-full min-h-screen flex-1 flex flex-col">
-            <div className="w-full flex flex-row items-center justify-between p-8">
-              <div className="relative w-36 h-12">
-                <Image fill priority={true} src="/refugio.png" alt="Logo da Refúgio" />
-              </div>
+            <div className="w-full flex flex-row items-center justify-between p-6 lg:p-8">
+              <Image width={144} height={48} priority={true} src="/refugio.png" alt="Logo da Refúgio" />
               <Menu />
             </div>
-            <div className="flex-1 flex flex-row items-center p-10 gap-10">
+            <div className="flex-1 flex flex-row items-center p-6 lg:p-16 gap-8 lg:gap-10">
               <div className="flex flex-col justify-center items-center gap-4">
                 <a href="https://www.instagram.com/refugio_lifestyle">
                   <SiInstagram color="#fff" size={18} />
@@ -53,15 +51,14 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <div className="w-full flex flex-col md:flex-row p-20 gap-10 lg:gap-28 bg-[#1b1b1b]">
+          <div className="w-full flex flex-col md:flex-row p-6 lg:p-16 gap-8 lg:gap-20 bg-[#1b1b1b]">
             <div className="flex flex-1 flex-col gap-6">
-              <div className="relative w-10 h-14">
-                <Image
-                  fill
-                  priority={true}
-                  src="/fire-white.png"
-                  alt="Foguinho da Refúgio" />
-              </div>
+              <Image
+                width={48}
+                height={56}
+                priority={true}
+                src="/fire-white.png"
+                alt="Foguinho da Refúgio" />
               <p className="text-justify text-white font-thin">
                 Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino.
               </p>
