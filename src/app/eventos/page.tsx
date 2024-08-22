@@ -2,7 +2,7 @@
 
 import { VolumeX, Volume2 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Eventos() {
   const [muted, setMuted] = useState(true)
@@ -12,7 +12,6 @@ export default function Eventos() {
     <div className="h-1 w-24 my-4 bg-gradient-to-r from-[#ad1a1c] to-[#830b0c]" />
     <div className="evento">
       <video
-        playsInline={true}
         loop={true}
         muted={muted}
         autoPlay={true}

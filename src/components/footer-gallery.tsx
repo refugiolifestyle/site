@@ -32,7 +32,7 @@ export default function FooterGallery() {
     return <LightGallery
         speed={500}
         download={false}
-        elementClassNames='grid grid-cols-3 gap-4'>
+        elementClassNames='grid grid-cols-3 gap-4 w-fit'>
         {
             fotos.map((foto, i) => (
                 <a className={i >= 6 ? 'hidden' : ''} href={foto} key={`refugio-gallery-${++i}`}>
