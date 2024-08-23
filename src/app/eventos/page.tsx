@@ -21,7 +21,7 @@ export default async function Eventos() {
             alt="Fundo com a logo da Conferência"
             className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-50" />
         </>
-        : eventos.map(evento => <Evento key={evento.id} evento={evento} />)
+        : eventos.map(item => <Evento key={item.id} evento={item} />)
     }
   </>;
 }

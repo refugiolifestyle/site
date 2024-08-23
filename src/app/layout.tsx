@@ -25,10 +25,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   let response = await fetch('http://localhost:3000/api/footer-gallery', {
-    cache: 'force-cache',
-    next: {
-      revalidate: 30 * 24 * 3600 // dia * horas *
-    }
+    cache: 'force-cache'
   })
 
   let { fotos } = await response.json() as FooterGalleryGET
