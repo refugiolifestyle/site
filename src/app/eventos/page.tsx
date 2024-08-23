@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { EventoType } from "@/app/api/eventos/route";
-import Evento from "@/components/evento";
+import EventoItem from "@/components/evento-item";
 
 export default async function Eventos() {
   const response = await fetch('http://localhost:3000/api/eventos')
@@ -21,7 +21,7 @@ export default async function Eventos() {
             alt="Fundo com a logo da Conferência"
             className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-50" />
         </>
-        : eventos.map(item => <Evento key={item.id} evento={item} />)
+        : eventos.map(item => <EventoItem key={item.id} evento={item} />)
     }
   </>;
 }
