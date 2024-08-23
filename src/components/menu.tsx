@@ -16,7 +16,8 @@ export default function Menu() {
                 <a key={menu.titulo} href={menu.href} className="hover:text-gray-400">
                     {menu.titulo}
                     {
-                        path === menu.href
+                        (menu.href.length === 1 && menu.href === path)
+                            || (menu.href.length > 1 && path.startsWith(menu.href))
                             ? <div className="h-1 w-12 bg-gradient-to-r from-[#ad1a1c] to-[#830b0c]" />
                             : null
                     }

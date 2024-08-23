@@ -1973,6 +1973,13 @@ foreground-child@^3.1.0:
     cross-spawn "^7.0.0"
     signal-exit "^4.0.1"
 
+framer-motion@^11.3.29:
+  version "11.3.29"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.3.29.tgz#5ec10a350b89789d43ea7d9c6bde45b28470f196"
+  integrity sha512-uyDuUOeOElJEA3kbkbyoTNEf75Jih1EUg0ouLKYMlGDdt/LaJPmO+FyOGAGxM2HwKhHcAoKFNveR5A8peb7yhw==
+  dependencies:
+    tslib "^2.4.0"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -3075,7 +3082,7 @@ reflect.getprototypeof@^1.0.4:
     react "^18"
     react-dom "^18"
     react-hook-form "^7.52.2"
-    refugio "file:C:/Users/Sofintech/AppData/Local/Yarn/Cache/v6/npm-refugio-2.0.0-6369ac2e-ca45-4ebb-9fdf-e61166fc584b-1724270294025/node_modules/refugio"
+    refugio "file:C:/Users/Sofintech/AppData/Local/Yarn/Cache/v6/npm-refugio-2.0.0-4ceaab10-4c23-4663-b913-11856cc7f1b1-1724379625164/node_modules/refugio"
     tailwind-merge "^2.5.2"
     tailwindcss-animate "^1.0.7"
     zod "^3.23.8"

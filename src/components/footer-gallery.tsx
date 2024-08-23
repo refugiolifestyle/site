@@ -1,34 +1,12 @@
-"use client";
+"use client"
 
-import { LoaderCircle } from 'lucide-react';
-import { useEffect, useState } from 'react';
-
+import { FooterGalleryGET } from '@/app/api/footer-gallery/route';
 import LightGallery from 'lightgallery/react';
 import Image from 'next/image';
 
-export default function FooterGallery() {
-    const [fotos, setFotos] = useState<string[]>()
+type FooterGalleryProps = FooterGalleryGET
 
-    useEffect(() => {
-        carregarFotos();
-    }, [])
-
-    const carregarFotos = async () => {
-        let response = await fetch('/api/footer-gallery', {
-            cache: 'force-cache',
-            next: {
-                revalidate: 30 * 24 * 3600 // dia * horas *
-            }
-        })
-        let data = await response.json()
-
-        setFotos(data.fotos)
-    }
-
-    if (!fotos) {
-        return <LoaderCircle color='#fff' className="animate-spin" />;
-    }
-
+export default async function FooterGallery({ fotos }: FooterGalleryProps) {
     return <LightGallery
         speed={500}
         download={false}

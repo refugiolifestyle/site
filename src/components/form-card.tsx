@@ -17,9 +17,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Check, LoaderCircle } from "lucide-react"
 import { useEffect, useState } from "react"
+import { EventoType } from "@/app/api/eventos/route"
 
 type FormCardProps = {
-    evento: string
+    evento: EventoType
 }
 
 const formSchema = z.object({
@@ -29,7 +30,7 @@ const formSchema = z.object({
 
 })
 
-export function FormCard({evento}: FormCardProps) {
+export function FormCard({ evento }: FormCardProps) {
     const [carregando, setCarregando] = useState(false)
     const form = useForm<z.infer<typeof formSchema>>({ resolver: zodResolver(formSchema) })
 
@@ -52,7 +53,7 @@ export function FormCard({evento}: FormCardProps) {
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <CardHeader>
                         <CardTitle>Formulário</CardTitle>
-                        <CardDescription>Preencha os dados abaixo para continuar sua pré-inscrição na {evento}</CardDescription>
+                        <CardDescription>Preencha os dados abaixo para continuar sua pré-inscrição</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <div className="grid w-full items-center gap-4">
@@ -76,15 +77,18 @@ export function FormCard({evento}: FormCardProps) {
                             </div>
                         </div>
                     </CardContent>
-                    <CardFooter>
+                    <CardFooter className="flex flex-col gap-4">
                         <Button type="submit" disabled={carregando} className="w-full bg-[#c1ff01] hover:bg-[#c0ff019e] text-black gap-2">
                             {
                                 carregando
                                     ? <LoaderCircle className="animate-spin" />
-                                    : <Check />
+                                    : null
                             }
                             Continuar
                         </Button>
+                        <a href="/eventos" className="text-sm">
+                            Voltar
+                        </a>
                     </CardFooter>
                 </form>
             </Form>

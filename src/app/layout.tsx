@@ -10,6 +10,7 @@ import FooterGallery from "@/components/footer-gallery";
 import Menu from "@/components/menu";
 import Image from "next/image";
 import Head from "next/head";
+import { FooterGalleryGET } from "./api/footer-gallery/route";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,20 @@ export const metadata: Metadata = {
   description: "Eventos da Refúgio Lifestyle"
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let response = await fetch('http://localhost:3000/api/footer-gallery', {
+    cache: 'force-cache',
+    next: {
+      revalidate: 30 * 24 * 3600 // dia * horas *
+    }
+  })
+
+  let { fotos } = await response.json() as FooterGalleryGET
+
   return (
     <html lang="en">
       <Head>
@@ -74,7 +84,7 @@ export default function RootLayout({
             </div>
             <div className="flex flex-1 flex-col gap-6">
               <h4 className="text-white text-2xl font-thin">Galeria</h4>
-              <FooterGallery />
+              <FooterGallery fotos={fotos} />
             </div>
             <div className="flex flex-1 flex-col gap-6">
               <h4 className="text-white text-2xl font-thin">Localização</h4>

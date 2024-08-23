@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
 
 export default function useFirebase() {
@@ -13,7 +14,8 @@ export default function useFirebase() {
         measurementId: process.env.FIREBASE_MEASUREMENT_ID
     });
 
+    const database = getDatabase(app)
     const storage = getStorage(app)
 
-    return { app, storage }
+    return { app, database, storage }
 }
