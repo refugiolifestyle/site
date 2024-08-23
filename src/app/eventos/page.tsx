@@ -4,7 +4,7 @@ import { EventoType } from "@/app/api/eventos/route";
 import EventoItem from "@/components/evento-item";
 
 export default async function Eventos() {
-  const response = await fetch('http://localhost:3000/api/eventos')
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos`)
   const { eventos } = await response.json() as { eventos: EventoType[] }
 
   return <>

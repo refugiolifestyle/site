@@ -24,7 +24,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let response = await fetch('http://localhost:3000/api/footer-gallery', {
+  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/footer-gallery`, {
     cache: 'force-cache'
   })
 

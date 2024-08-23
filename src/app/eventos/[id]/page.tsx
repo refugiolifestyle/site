@@ -10,7 +10,7 @@ type EventoProps = {
 }
 
 export default async function Evento({ params }: EventoProps) {
-    const response = await fetch(`http://localhost:3000/api/eventos/${params.id}`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${params.id}`)
     const { evento } = await response.json() as { evento: EventoType }
 
     return <>

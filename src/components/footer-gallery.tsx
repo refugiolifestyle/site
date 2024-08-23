@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 type FooterGalleryProps = FooterGalleryGET
 
-export default async function FooterGallery({ fotos }: FooterGalleryProps) {
+export default function FooterGallery({ fotos }: FooterGalleryProps) {
     return <LightGallery
         speed={500}
         download={false}
