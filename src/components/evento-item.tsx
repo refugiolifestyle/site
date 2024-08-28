@@ -19,7 +19,7 @@ export default function EventoItem({ evento }: EventoItemProps) {
             muted={muted}
             autoPlay={true}
             controls={false}
-            className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-25">
+            className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-25 pointer-events-none">
             <source src={evento.chamada} type="video/mp4" />
         </video>
         <div

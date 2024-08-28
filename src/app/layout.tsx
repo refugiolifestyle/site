@@ -10,7 +10,6 @@ import FooterGallery from "@/components/footer-gallery";
 import Menu from "@/components/menu";
 import Image from "next/image";
 import Head from "next/head";
-import { FooterGalleryGET } from "./api/footer-gallery/route";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,11 +23,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/footer-gallery`, {
+  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fotosGaleria`, {
     cache: 'force-cache'
   })
 
-  let { fotos } = await response.json() as FooterGalleryGET
+  let { fotos } = await response.json()
 
   return (
     <html lang="en">

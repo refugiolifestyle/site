@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-import { EventoType } from "@/app/api/eventos/route";
 import EventoItem from "@/components/evento-item";
+import { EventoType } from "@/types/evento";
 
 export default async function Eventos() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos`)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getEventos`)
   const { eventos } = await response.json() as { eventos: EventoType[] }
 
   return <>

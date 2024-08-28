@@ -17,6 +17,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "firebase": "^10.13.0",
+    "firebase-functions": "^5.1.0",
     "framer-motion": "^11.3.29",
     "lightgallery": "^2.7.2",
     "lucide-react": "^0.428.0",

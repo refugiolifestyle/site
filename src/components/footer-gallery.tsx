@@ -1,12 +1,9 @@
 "use client"
 
-import { FooterGalleryGET } from '@/app/api/footer-gallery/route';
 import LightGallery from 'lightgallery/react';
 import Image from 'next/image';
 
-type FooterGalleryProps = FooterGalleryGET
-
-export default function FooterGallery({ fotos }: FooterGalleryProps) {
+export default function FooterGallery({ fotos }: { fotos: string[] }) {
     return <LightGallery
         speed={500}
         download={false}
