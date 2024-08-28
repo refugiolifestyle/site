@@ -1,6 +1,6 @@
 "use client"
 
-import { EventoType } from "@/app/api/eventos/route"
+import { EventoType } from "@/types/evento"
 import { Volume2, VolumeX } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
