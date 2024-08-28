@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Check, LoaderCircle } from "lucide-react"
 import { useEffect, useState } from "react"
-import { EventoType } from "@/app/api/eventos/route"
+import { EventoType } from "@/types/evento"
 
 type FormCardProps = {
     evento: EventoType
