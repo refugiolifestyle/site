@@ -23,7 +23,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fotosGaleria`, {
+  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getGaleria`, {
     cache: 'force-cache'
   })
 
