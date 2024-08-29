@@ -31,11 +31,11 @@ export default function EventoItem({ evento }: EventoItemProps) {
                     : <Volume2 color="#fff" />
             }
         </div>
-        <a href={'#'} className=" cursor-pointer p-4 border border-white rounded-xl flex flex-col md:flex-row items-start md:items-center gap-6 bg-neutral-700 bg-opacity-50 hover:bg-opacity-75">
+        <a href={evento.inscricoesAbertas ? `/eventos/${evento.id}` : '#'} className=" cursor-pointer p-4 border border-white rounded-xl flex flex-col md:flex-row items-start md:items-center gap-6 bg-neutral-700 bg-opacity-50 hover:bg-opacity-75">
             <Image width={86} height={86} objectFit="contain" src={evento.logo} alt={`Logo ${evento.titulo}`} />
             <div className="flex flex-col">
                 <h1 className="text-white text-2xl">{evento.titulo}</h1>
-                <h4 className="text-gray-300 font-light">Inscrições em breve</h4>
+                <h4 className="text-gray-300 font-light">{evento.inscricoesAbertas ? 'Pré-inscrições aqui' : 'Inscrições em breve'}</h4>
             </div>
         </a>
     </div>

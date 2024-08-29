@@ -18,33 +18,47 @@ import { useForm } from "react-hook-form"
 import { Check, LoaderCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 import { EventoType } from "@/types/evento"
+import { cn } from "@/lib/utils"
+import { InscritoType } from "@/types/inscrito"
 
-type FormCardProps = {
-    evento: EventoType
+type FormCardValidarInscritoProps = {
+    evento: EventoType,
+    setInscrito: (inscrito: InscritoType | null) => void
 }
 
 const formSchema = z.object({
     cpf: z
         .string({ required_error: "Campo obrigatório" })
-        .length(11, { message: "Campo precisa ter no máximo 11 digitos" })
-
+        .length(11, { message: "Campo precisa ter no máximo 11 digitos" }),
 })
 
-export function FormCard({ evento }: FormCardProps) {
+export function FormCardValidarInscrito({ setInscrito }: FormCardValidarInscritoProps) {
     const [carregando, setCarregando] = useState(false)
-    const form = useForm<z.infer<typeof formSchema>>({ resolver: zodResolver(formSchema) })
 
-    async function carregarDados() {
-        let cpf = form.watch('cpf')
-        alert(cpf)
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema)
+    })
 
-        await new Promise(r => setTimeout(r, 2000))
-    }
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        setCarregando(true)
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getInscrito?cpf=${values.cpf}`)
+        if (response.status == 400) {
+            alert("Falha ao buscar o inscrito")
+        }
+        else if (response.status == 404) {
+            setInscrito(values)
+        }
+        else {
+            const {inscrito} = await response.json() as { inscrito: InscritoType }
+
+            inscrito.cpf = inscrito.cpf?.replaceAll(/[^\d]+/g, '')
+            inscrito.telefone = inscrito.telefone?.replaceAll(/[^\d]+/g, '')
+
+            setInscrito(inscrito)
+        }
+
+        setCarregando(false)
     }
 
     return (
@@ -63,13 +77,9 @@ export function FormCard({ evento }: FormCardProps) {
                                     name="cpf"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>CPF</FormLabel>
                                             <FormControl>
-                                                <Input type="number" {...field} />
+                                                <Input placeholder="CPF, somente números" type="number" {...field} />
                                             </FormControl>
-                                            <FormDescription>
-                                                Digite somente os números.
-                                            </FormDescription>
                                             <FormMessage />
                                         </FormItem>
                                     )}
@@ -78,11 +88,11 @@ export function FormCard({ evento }: FormCardProps) {
                         </div>
                     </CardContent>
                     <CardFooter className="flex flex-col gap-4">
-                        <Button type="submit" disabled={carregando} className="w-full bg-[#c1ff01] hover:bg-[#c0ff019e] text-black gap-2">
+                        <Button type="submit" disabled={carregando} className="w-full gap-2 text-white bg-gradient-to-r from-[#ad1a1c] to-[#830b0c]">
                             {
                                 carregando
                                     ? <LoaderCircle className="animate-spin" />
-                                    : null
+                                    : <Check />
                             }
                             Continuar
                         </Button>
