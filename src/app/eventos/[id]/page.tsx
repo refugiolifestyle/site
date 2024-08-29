@@ -1,7 +1,11 @@
+"use client"
+
 import Image from "next/image";
 
 import { FormCard } from "@/components/form-card";
 import { EventoType } from "@/types/evento";
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 type EventoProps = {
     params: {
@@ -9,9 +13,24 @@ type EventoProps = {
     }
 }
 
-export default async function Evento({ params }: EventoProps) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getEvento?eventoId=${params.id}`)
-    const { evento } = await response.json() as { evento: EventoType }
+export default function Evento({ params }: EventoProps) {
+    const [evento, setEvento] = useState<EventoType>()
+
+    useEffect(() => {
+        (async () => {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getEvento?eventoId=${params.id}`)
+            const data = await response.json() as { evento: EventoType }
+
+            setEvento(data.evento)
+        })();
+    }, [])
+    
+    if (!evento) {
+        return <div className="flex-1 flex items-center justify-center">
+            <div className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full min-h-screen brightness-50 bg-black" />
+            <Loader2 className="animate-spin text-white" />
+        </div>
+    }
 
     return <>
         <Image
