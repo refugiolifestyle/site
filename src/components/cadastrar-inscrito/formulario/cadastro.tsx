@@ -57,7 +57,7 @@ const FormSchema = z
             .min(1, { message: "O Campo Célula é obrigatório" }),
     })
 
-export default function CadastroFormularioCadastro({ evento, setTabActive, setInscrito, inscrito }: CadastrarInscritoContentProps) {
+export default function CadastroFormularioCadastro({ evento, setTabActive, setInscrito, inscrito, voltarInicio }: CadastrarInscritoContentProps) {
     const [celulas, setCelulas] = useState<CelulaType[]>()
 
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -222,7 +222,7 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
                                 }
                                 Continuar
                             </Button>
-                            <a href="#" onClick={() => setInscrito(undefined)}>
+                            <a href="#" onClick={voltarInicio}>
                                 Cancelar
                             </a>
                         </CardFooter>

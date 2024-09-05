@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { CheckCircle, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function FinalizadoTabsContent({ evento, setInscrito, setTabActive }: CadastrarInscritoContentProps) {
+export default function FinalizadoTabsContent({ evento, setInscrito, setTabActive, voltarInicio }: CadastrarInscritoContentProps) {
 
     function novaInscricao() {
         setInscrito(undefined)
@@ -27,7 +27,7 @@ export default function FinalizadoTabsContent({ evento, setInscrito, setTabActiv
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
                 <Button
-                    onClick={novaInscricao}
+                    onClick={voltarInicio}
                     className="w-full gap-2 text-white bg-gradient-to-r from-[#ad1a1c] to-[#830b0c]">
                     <Plus />
                     Nova inscrição

@@ -24,7 +24,7 @@ const FormSchema = z.object({
         .refine(data => !!data, "O Campo Termo é obrigatório")
 })
 
-export default function PagamentoTabsContent({ setTabActive, setInscrito, inscrito }: CadastrarInscritoContentProps) {
+export default function PagamentoTabsContent({ setTabActive, setInscrito, inscrito, voltarInicio }: CadastrarInscritoContentProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -87,7 +87,7 @@ export default function PagamentoTabsContent({ setTabActive, setInscrito, inscri
                             }
                             Pagar
                         </Button>
-                        <a href="#" onClick={() => setInscrito(undefined)}>
+                        <a href="#" onClick={voltarInicio}>
                             Cancelar
                         </a>
                     </CardFooter>
