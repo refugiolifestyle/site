@@ -18,12 +18,12 @@ export const metadata: Metadata = {
   description: "Eventos da Refúgio Lifestyle"
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
-  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getGaleria`, {
+}>
+
+export default async function RootLayout({ children }: RootLayoutProps) {
+  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/galeria`, {
     cache: 'force-cache'
   })
 
@@ -43,7 +43,7 @@ export default async function RootLayout({
               <Image width={144} height={48} priority={true} src="/refugio.png" alt="Logo da Refúgio" />
               <Menu />
             </div>
-            <div className="flex-1 flex flex-row items-center p-6 lg:p-16 gap-8 lg:gap-10">
+            <div className="flex-1 flex flex-row items-center p-6 lg:py-0 lg:px-16 gap-x-8 lg:gap-x-10">
               <div className="flex flex-col justify-center items-center gap-4">
                 <a href="https://www.instagram.com/refugio_lifestyle">
                   <SiInstagram color="#fff" size={18} />
@@ -58,7 +58,7 @@ export default async function RootLayout({
                   <SiYoutube color="#fff" size={18} />
                 </a>
               </div>
-              <div className="flex-1 flex flex-col justify-start items-start gap-2">
+              <div className="flex-1 flex flex-col justify-start items-start py-4">
                 {children}
               </div>
             </div>

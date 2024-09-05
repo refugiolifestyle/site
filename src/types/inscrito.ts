@@ -5,6 +5,6 @@ export type InscritoType = {
     telefone?: string
     rede?: string
     celula?: string
-    preInscricao?: string
-    inscricaoConfirmada?: string
+    inscricao?: string
+    pagamentoInscricao?: string
 }

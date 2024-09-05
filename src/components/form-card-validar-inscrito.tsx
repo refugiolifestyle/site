@@ -23,7 +23,7 @@ import { InscritoType } from "@/types/inscrito"
 
 type FormCardValidarInscritoProps = {
     evento: EventoType,
-    setInscrito: (inscrito: InscritoType | null) => void
+    // setInscrito: (inscrito: InscritoType | null) => void
 }
 
 const formSchema = z.object({
@@ -32,7 +32,7 @@ const formSchema = z.object({
         .length(11, { message: "Campo precisa ter no máximo 11 digitos" }),
 })
 
-export function FormCardValidarInscrito({ setInscrito }: FormCardValidarInscritoProps) {
+export function FormCardValidarInscrito({  }: FormCardValidarInscritoProps) {
     const [carregando, setCarregando] = useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -47,7 +47,7 @@ export function FormCardValidarInscrito({ setInscrito }: FormCardValidarInscrito
             alert("Falha ao buscar o inscrito")
         }
         else if (response.status == 404) {
-            setInscrito(values)
+            // setInscrito(values)
         }
         else {
             const {inscrito} = await response.json() as { inscrito: InscritoType }
@@ -55,7 +55,7 @@ export function FormCardValidarInscrito({ setInscrito }: FormCardValidarInscrito
             inscrito.cpf = inscrito.cpf?.replaceAll(/[^\d]+/g, '')
             inscrito.telefone = inscrito.telefone?.replaceAll(/[^\d]+/g, '')
 
-            setInscrito(inscrito)
+            // setInscrito(inscrito)
         }
 
         setCarregando(false)

@@ -1,13 +1,29 @@
+"use client"
+
 import Image from "next/image";
 
 import EventoItem from "@/components/evento-item";
 import { EventoType } from "@/types/evento";
+import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 
-export default async function Eventos() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos`)
+type InscritosProps = {
+  params: {
+      id: string
+  }
+}
 
-  const { eventos } = await response.json() as { eventos: EventoType[] }
+export default function Inscritos({ params }: InscritosProps) {
+  const [eventos, setEventos] = useState<EventoType[]>()
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getEventos`)
+      const data = await response.json() as { eventos: EventoType[] }
+
+      setEventos(data.eventos)
+    })();
+  }, [])
 
   return <>
     <h1 className="text-white text-6xl font-thin">Eventos</h1>

@@ -70,7 +70,7 @@ export function FormCardCadastrarInscrito({ evento, inscrito, handleVoltar }: Fo
 
         let payload: InscritoType = {
             ...values,
-            preInscricao: new Date().toString()
+            inscricao: new Date().toString()
         }
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/postInscrito?eventoId=${evento.id}`, {
