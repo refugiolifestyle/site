@@ -14,18 +14,6 @@ export default async function Evento({ params }: EventoProps) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${params.id}`)
     const { evento } = await response.json() as { evento: EventoType }
 
-    if (!evento) {
-        return <div className="flex-1 flex items-center justify-center">
-            <Image
-                fill
-                priority={true}
-                src="/bg-layout.jpg"
-                alt="Fundo com a logo da Conferência"
-                className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-50" />
-            <Loader2 className="animate-spin text-white" />
-        </div>
-    }
-
     return <>
         <img
             src={evento.fundo}
