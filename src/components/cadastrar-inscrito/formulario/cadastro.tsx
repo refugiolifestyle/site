@@ -46,6 +46,9 @@ const FormSchema = z
             .string({ required_error: "O Campo Telefone é obrigatório" })
             .min(10, { message: "Campo precisa ter no mínimo 10 digitos" })
             .max(11, { message: "Campo precisa ter no máximo 11 digitos" }),
+        email: z
+            .string({ required_error: "O Campo Nome é obrigatório" })
+            .email(),
         rede: z
             .string({
                 required_error: "O Campo Rede é obrigatório"
@@ -67,6 +70,7 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
             celula: "",
             nome: "",
             rede: "",
+            email: "",
             telefone: "",
             ...inscrito
         }
@@ -165,6 +169,18 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
                                         <FormItem>
                                             <FormControl>
                                                 <Input placeholder="Digite seu telefone, DDD + Número" {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="email"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormControl>
+                                                <Input placeholder="Digite seu email" type="email" {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>

@@ -3,6 +3,7 @@ export type InscritoType = {
     cpf: string
     nome?: string
     telefone?: string
+    email?: string
     rede?: string
     celula?: string
     inscricao?: string
