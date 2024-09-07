@@ -1,8 +1,8 @@
-import { TabsContent } from "@/components/ui/tabs";
 import { CadastrarInscritoContentProps } from "@/components/cadastrar-inscrito";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
-import { CheckCircle, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TabsContent } from "@/components/ui/tabs";
+import { CheckCircle, Plus } from "lucide-react";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 
 export default function FinalizadoTabsContent({ evento, setInscrito, setTabActive, voltarInicio }: CadastrarInscritoContentProps) {
 

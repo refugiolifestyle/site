@@ -1,22 +1,20 @@
-import { TabsContent } from "@/components/ui/tabs";
 import { CadastrarInscritoContentProps } from "@/components/cadastrar-inscrito";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { z } from "zod";
-import { useForm } from "react-hook-form";
+    FormMessage
+} from "@/components/ui/form";
+import { TabsContent } from "@/components/ui/tabs";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const FormSchema = z.object({
     termo: z
@@ -24,7 +22,7 @@ const FormSchema = z.object({
         .refine(data => !!data, "O Campo Termo é obrigatório")
 })
 
-export default function PagamentoTabsContent({ setTabActive, setInscrito, inscrito, voltarInicio }: CadastrarInscritoContentProps) {
+export default function PagamentoTabsContent({ evento, setTabActive, inscrito, voltarInicio }: CadastrarInscritoContentProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -32,14 +30,53 @@ export default function PagamentoTabsContent({ setTabActive, setInscrito, inscri
         },
     })
 
-    async function onSubmit(data: z.infer<typeof FormSchema>) {
-        alert(`Abre a tela de pagamento para o inscrito ${inscrito?.nome}`)
-        
-        await new Promise(r => setTimeout(r, 2000))
-        
-        setTabActive("finalizado")
+    async function onSubmit() {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${evento.id}/inscricoes/${inscrito?.cpf}/pagamento`)
+        const data = await response.json() as {
+            message?: string
+            checkout?: string
+        }
 
-        return true
+        if (!response.ok) {
+            alert(data.message)
+            return false
+        }
+
+        window.open(data.checkout)
+
+        let pagamentoEfetivado = await new Promise<boolean>(async (resolve, reject) => {
+            let looping = true
+            while (looping) {
+                await new Promise(r => {
+                    setTimeout(r, 4000)
+                })
+
+                try {
+                    const responseVP = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${evento.id}/inscricoes/${inscrito?.cpf}/pagamento/status`, { cache: "no-cache" })
+                    if (!responseVP.ok) {
+                        throw new Error()
+                    }
+
+                    const { status } = await responseVP.json() as { status: string }
+
+                    looping = status !== 'paid'
+                }
+                catch (e) {
+                    looping = false
+                    alert("Falha ao observar o status de pagamento, tente novamente mais tarde.")
+                    reject()
+                }
+            }
+
+            resolve(true)
+        })
+
+        if (pagamentoEfetivado) {
+            setTabActive("finalizado")
+            return true
+        }
+
+        return false
     }
 
     return <TabsContent value="pagamento">
@@ -64,6 +101,7 @@ export default function PagamentoTabsContent({ setTabActive, setInscrito, inscri
                                     <div className="space-x-2 flex items-center">
                                         <FormControl>
                                             <Checkbox
+                                                disabled={form.formState.isSubmitting}
                                                 checked={field.value}
                                                 onCheckedChange={field.onChange}
                                             />
@@ -78,14 +116,14 @@ export default function PagamentoTabsContent({ setTabActive, setInscrito, inscri
                     <CardFooter className="flex flex-col gap-4">
                         <Button
                             type="submit"
-                            disabled={form.formState.isSubmitting}
+                            disabled={form.formState.isSubmitting || !form.watch("termo")}
                             className="w-full gap-2 text-white bg-gradient-to-r from-[#ad1a1c] to-[#830b0c]">
                             {
                                 form.formState.isSubmitting
-                                    ? <Loader2 className="mr-1 animate-spin" />
-                                    : <Check className="mr-1" />
+                                    ? <><Loader2 className="mr-1 animate-spin" />Aguardando pagamento</>
+                                    : <><Check className="mr-1" />Pagar</>
                             }
-                            Pagar
+
                         </Button>
                         <a href="#" onClick={voltarInicio}>
                             Cancelar

@@ -1,11 +1,13 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import { cpf as cpfValidation } from 'cpf-cnpj-validator'
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { cpf, cpf as cpfValidation } from 'cpf-cnpj-validator'
 
+import { CadastrarInscritoContentProps } from "@/components/cadastrar-inscrito"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import {
     Form,
     FormControl,
@@ -13,6 +15,7 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import {
     Select,
     SelectContent,
@@ -20,14 +23,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import { CadastrarInscritoContentProps } from "@/components/cadastrar-inscrito"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { TabsContent } from "@/components/ui/tabs"
-import { ArrowLeft, Check, Loader2 } from "lucide-react"
-import { useEffect, useState } from "react"
 import { CelulaType } from "@/types/celulas"
 import { InscritoType } from "@/types/inscrito"
+import { Check, Loader2 } from "lucide-react"
+import { useEffect, useState } from "react"
 import { v4 } from "uuid"
 
 const FormSchema = z
@@ -69,7 +69,7 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
             rede: "",
             telefone: "",
             ...inscrito
-        } 
+        }
     })
 
     useEffect(() => {

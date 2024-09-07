@@ -1,11 +1,13 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import { cpf as cpfValidation } from 'cpf-cnpj-validator'
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { cpf, cpf as cpfValidation } from 'cpf-cnpj-validator'
 
+import { CadastrarInscritoContentProps } from "@/components/cadastrar-inscrito"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import {
     Form,
     FormControl,
@@ -14,8 +16,6 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { CadastrarInscritoContentProps } from "@/components/cadastrar-inscrito"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { TabsContent } from "@/components/ui/tabs"
 import { InscritoType } from "@/types/inscrito"
 import { Check, Loader2 } from "lucide-react"
@@ -38,21 +38,26 @@ export default function ValidacaoFormularioCadastro({ evento, setInscrito, setTa
     })
 
     async function onSubmit({ cpf }: z.infer<typeof FormSchema>) {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${evento.id}/inscricoes/${cpf}`)
-        const { inscrito } = await response.json() as { inscrito: InscritoType | null }
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${evento.id}/inscricoes/${cpf}`)
+            const { inscrito } = await response.json() as { inscrito: InscritoType | null }
 
-        if (inscrito) {
-            setInscrito(inscrito)
-            if (inscrito.inscricao && !inscrito.pagamentoInscricao) {
-                setTabActive("pagamento")
-            } else if (inscrito.inscricao && inscrito.pagamentoInscricao) {
-                setTabActive("finalizado")
+            if (inscrito) {
+                setInscrito(inscrito)
+                if (inscrito.pagamento && inscrito.pagamento.status === 'paid') {
+                    setTabActive("finalizado")
+                } else {
+                    setTabActive("pagamento")
+                }
+            } else {
+                setInscrito({ cpf })
             }
-        } else {
-            setInscrito({ cpf })
-        }
 
-        return true
+            return true
+        }
+        catch (e) {
+            alert("Falha ao validar o inscrito")
+        }
     }
 
     return (

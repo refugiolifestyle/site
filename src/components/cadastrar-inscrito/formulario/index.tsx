@@ -1,9 +1,9 @@
 "use client"
 
 import { CadastrarInscritoContentProps } from "@/components/cadastrar-inscrito"
-import { TabsContent } from "@/components/ui/tabs"
 import CadastroFormularioCadastro from "@/components/cadastrar-inscrito/formulario/cadastro"
 import ValidacaoFormularioCadastro from "@/components/cadastrar-inscrito/formulario/validacao"
+import { TabsContent } from "@/components/ui/tabs"
 
 export default function FormularioCadastrarInscrito({ evento, voltarInicio, setTabActive, inscrito, setInscrito }: CadastrarInscritoContentProps) {
     return (
