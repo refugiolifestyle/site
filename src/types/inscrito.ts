@@ -6,6 +6,7 @@ export type InscritoType = {
     email?: string
     rede?: string
     celula?: string
+    novo?: boolean
     inscricao?: string
     pagamento?: Pagamento
 }

@@ -40,9 +40,9 @@ export default function ValidacaoFormularioCadastro({ evento, setInscrito, setTa
     async function onSubmit({ cpf }: z.infer<typeof FormSchema>) {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${evento.id}/inscricoes/${cpf}`)
-            const { inscrito } = await response.json() as { inscrito: InscritoType | null }
+            const { inscrito } = await response.json() as { inscrito: InscritoType }
 
-            if (inscrito) {
+            if (inscrito && !inscrito.novo) {
                 setInscrito(inscrito)
                 if (inscrito.pagamento && inscrito.pagamento.status === 'paid') {
                     setTabActive("finalizado")
@@ -50,7 +50,7 @@ export default function ValidacaoFormularioCadastro({ evento, setInscrito, setTa
                     setTabActive("pagamento")
                 }
             } else {
-                setInscrito({ cpf })
+                setInscrito(inscrito)
             }
 
             return true
