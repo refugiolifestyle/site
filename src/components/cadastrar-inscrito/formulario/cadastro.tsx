@@ -47,7 +47,10 @@ const FormSchema = z
             .min(10, { message: "Campo precisa ter no mínimo 10 digitos" })
             .max(11, { message: "Campo precisa ter no máximo 11 digitos" }),
         email: z
-            .string({ required_error: "O Campo Nome é obrigatório" })
+            .string({ 
+                required_error: "O Campo Email é obrigatório", 
+                invalid_type_error: "O Campo Email esta inválido"
+            })
             .email(),
         rede: z
             .string({
