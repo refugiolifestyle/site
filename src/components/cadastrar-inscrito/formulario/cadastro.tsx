@@ -68,7 +68,7 @@ const FormSchema = z
             .boolean()
             .default(false)
     })
-    .superRefine(({visitante, rede, celula}, ctx) => {
+    .superRefine(({ visitante, rede, celula }, ctx) => {
         if (!visitante) {
             if (!rede) {
                 return ctx.addIssue({
@@ -136,7 +136,7 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
         })
 
         if (!response.ok) {
-            const {message} = await response.json()
+            const { message } = await response.json()
 
             alert(message)
             return false
@@ -220,26 +220,6 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
                                         </FormItem>
                                     )}
                                 />
-                                <FormField
-                                    control={form.control}
-                                    name="visitante"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <div className="flex flex-row space-x-2 mt-4">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <FormLabel>
-                                                    Sou visitante, não tenho célula
-                                                </FormLabel>
-                                            </div>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
                                 {
                                     !form.watch('visitante')
                                     && <>
@@ -283,6 +263,26 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
                                         />
                                     </>
                                 }
+                                <FormField
+                                    control={form.control}
+                                    name="visitante"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <div className="flex flex-row space-x-2 mt-4">
+                                                <FormControl>
+                                                    <Checkbox
+                                                        checked={field.value}
+                                                        onCheckedChange={field.onChange}
+                                                    />
+                                                </FormControl>
+                                                <FormLabel>
+                                                    Sou visitante, não tenho célula
+                                                </FormLabel>
+                                            </div>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-col gap-4">
