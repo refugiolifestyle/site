@@ -48,7 +48,7 @@ export default function EventoItem({ evento }: EventoItemProps) {
                 {
                     inscricoesAbertas === undefined
                         ? <Loader2 className="text-white animate-spin mt-2" />
-                        : <h4 className="text-gray-300 font-light">{inscricoesAbertas ? 'Pré-inscrições aqui' : 'Inscrições em breve'}</h4>
+                        : <h4 className="text-gray-300 font-light">{inscricoesAbertas ? 'Inscrições aqui' : 'Inscrições em breve'}</h4>
                 }
             </div>
         </a>
