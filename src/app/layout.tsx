@@ -53,7 +53,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                   <SiYoutube color="#fff" size={18} />
                 </a>
               </div>
-              <div className="flex-1 flex flex-col justify-start items-start py-4">
+              <div className="flex-1 flex flex-col justify-center items-start py-4">
                 {children}
               </div>
             </div>
