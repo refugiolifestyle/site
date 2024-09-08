@@ -229,7 +229,7 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <Select onValueChange={field.onChange} value={field.value}>
-                                                        <FormControl className="mt-4">
+                                                        <FormControl>
                                                             <SelectTrigger>
                                                                 <SelectValue placeholder="Selecione uma rede" />
                                                             </SelectTrigger>
