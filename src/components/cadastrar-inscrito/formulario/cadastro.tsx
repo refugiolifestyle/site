@@ -29,6 +29,7 @@ import { InscritoType } from "@/types/inscrito"
 import { Check, Loader2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { v4 } from "uuid"
+import { PagamentoModal } from "../pagamento/modal"
 
 const FormSchema = z
     .object({
@@ -49,9 +50,8 @@ const FormSchema = z
         email: z
             .string({ 
                 required_error: "O Campo Email é obrigatório", 
-                invalid_type_error: "O Campo Email esta inválido"
             })
-            .email(),
+            .email("O Campo Email é obrigatório"),
         rede: z
             .string({
                 required_error: "O Campo Rede é obrigatório"

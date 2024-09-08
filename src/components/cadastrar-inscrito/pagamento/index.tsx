@@ -13,8 +13,10 @@ import {
 import { TabsContent } from "@/components/ui/tabs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Loader2 } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { PagamentoModal } from "./modal";
 
 const FormSchema = z.object({
     termo: z
@@ -23,6 +25,8 @@ const FormSchema = z.object({
 })
 
 export default function PagamentoTabsContent({ evento, setTabActive, inscrito, voltarInicio }: CadastrarInscritoContentProps) {
+    const [checkout, setCheckout] = useState<string>()
+    
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -42,7 +46,7 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
             return false
         }
 
-        window.open(data.checkout)
+        setCheckout(data.checkout)
 
         let pagamentoEfetivado = await new Promise<boolean>(async (resolve, reject) => {
             let looping = true
@@ -72,6 +76,7 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
         })
 
         if (pagamentoEfetivado) {
+            setCheckout(undefined)
             setTabActive("finalizado")
             return true
         }
@@ -80,6 +85,7 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
     }
 
     return <TabsContent value="pagamento">
+        <PagamentoModal url={checkout} />
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <Card className="w-[350px]">
