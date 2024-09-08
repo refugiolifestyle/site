@@ -13,6 +13,7 @@ import {
     FormControl,
     FormField,
     FormItem,
+    FormLabel,
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -30,6 +31,7 @@ import { Check, Loader2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { v4 } from "uuid"
 import { PagamentoModal } from "../pagamento/modal"
+import { Checkbox } from "@/components/ui/checkbox"
 
 const FormSchema = z
     .object({
@@ -48,19 +50,40 @@ const FormSchema = z
             .min(10, { message: "Campo precisa ter no mínimo 10 digitos" })
             .max(11, { message: "Campo precisa ter no máximo 11 digitos" }),
         email: z
-            .string({ 
-                required_error: "O Campo Email é obrigatório", 
+            .string({
+                required_error: "O Campo Email é obrigatório",
             })
             .email("O Campo Email é obrigatório"),
         rede: z
             .string({
                 required_error: "O Campo Rede é obrigatório"
-            }),
+            })
+            .optional(),
         celula: z
             .string({
                 required_error: "O Campo Célula é obrigatório"
             })
-            .min(1, { message: "O Campo Célula é obrigatório" }),
+            .optional(),
+        visitante: z
+            .boolean()
+            .default(false)
+    })
+    .superRefine(({visitante, rede, celula}, ctx) => {
+        if (!visitante) {
+            if (!rede) {
+                return ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: "O Campo Rede é obrigatório",
+                    path: ["rede"]
+                })
+            } else if (!celula) {
+                return ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: "O Campo Célula é obrigatório",
+                    path: ["celula"]
+                })
+            }
+        }
     })
 
 export default function CadastroFormularioCadastro({ evento, setTabActive, setInscrito, inscrito, voltarInicio }: CadastrarInscritoContentProps) {
@@ -75,6 +98,7 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
             rede: "",
             email: "",
             telefone: "",
+            visitante: false,
             ...inscrito
         }
     })
@@ -106,10 +130,17 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
             nome: data.nome.toLowerCase().replace(/(^.|\s+.)/g, m => m.toUpperCase())
         }
 
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${evento.id}/inscricoes`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${evento.id}/inscricoes`, {
             method: 'POST',
             body: JSON.stringify(payload)
         })
+
+        if (!response.ok) {
+            const {message} = await response.json()
+
+            alert(message)
+            return false
+        }
 
         setInscrito(payload)
         setTabActive("pagamento")
@@ -133,7 +164,7 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
     return (
         <TabsContent value="formulario">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <form onSubmit={form.handleSubmit(onSubmit, data => console.log(data))}>
                     <Card className="w-[350px]">
                         <CardHeader>
                             <CardTitle>Formulário</CardTitle>
@@ -191,42 +222,67 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="rede"
+                                    name="visitante"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <Select onValueChange={field.onChange} value={field.value}>
+                                            <div className="flex flex-row space-x-2 mt-4">
                                                 <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Selecione uma rede" />
-                                                    </SelectTrigger>
+                                                    <Checkbox
+                                                        checked={field.value}
+                                                        onCheckedChange={field.onChange}
+                                                    />
                                                 </FormControl>
-                                                <SelectContent>
-                                                    {redes?.map(r => <SelectItem key={r} value={r}>{r}</SelectItem>)}
-                                                </SelectContent>
-                                            </Select>
+                                                <FormLabel>
+                                                    Sou visitante, não tenho célula
+                                                </FormLabel>
+                                            </div>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
-                                <FormField
-                                    control={form.control}
-                                    name="celula"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <Select onValueChange={field.onChange} value={field.value}>
-                                                <FormControl>
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Selecione uma célula" />
-                                                    </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    {celulasFiltradas?.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
-                                                </SelectContent>
-                                            </Select>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                {
+                                    !form.watch('visitante')
+                                    && <>
+                                        <FormField
+                                            control={form.control}
+                                            name="rede"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <Select onValueChange={field.onChange} value={field.value}>
+                                                        <FormControl className="mt-4">
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Selecione uma rede" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            {redes?.map(r => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+                                                        </SelectContent>
+                                                    </Select>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="celula"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <Select onValueChange={field.onChange} value={field.value}>
+                                                        <FormControl>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Selecione uma célula" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            {celulasFiltradas?.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                                                        </SelectContent>
+                                                    </Select>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </>
+                                }
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-col gap-4">

@@ -43,8 +43,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               <Image width={144} height={48} priority={true} src="/refugio.png" alt="Logo da Refúgio" />
               <Menu />
             </div>
-            <div className="flex-1 flex flex-row items-center p-6 lg:py-0 lg:px-16 gap-x-8 lg:gap-x-10">
-              <div className="flex flex-col justify-center items-center gap-4">
+            <div className="flex-1 flex flex-col lg:flex-row items-center p-6 lg:py-0 lg:px-16 gap-x-8 lg:gap-x-10">
+              <div className="hidden lg:flex flex-col justify-center items-center gap-4 my-4">
                 <a href="https://www.instagram.com/refugio_lifestyle">
                   <SiInstagram color="#fff" size={18} />
                 </a>
@@ -65,12 +65,28 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           </div>
           <div className="w-full flex flex-col md:flex-row p-6 lg:p-16 gap-8 lg:gap-20 bg-[#1b1b1b]">
             <div className="flex flex-1 flex-col gap-6">
-              <Image
-                width={48}
-                height={56}
-                priority={true}
-                src="/fire-white.png"
-                alt="Foguinho da Refúgio" />
+              <div className="flex flex-row justify-between">
+                <Image
+                  width={48}
+                  height={56}
+                  priority={true}
+                  src="/fire-white.png"
+                  alt="Foguinho da Refúgio" />
+                <div className="flex lg:hidden flex-row justify-center items-center gap-4 my-4">
+                  <a href="https://www.instagram.com/refugio_lifestyle">
+                    <SiInstagram color="#fff" size={18} />
+                  </a>
+                  <a href="https://www.tiktok.com/@refugio_lifestyle">
+                    <SiTiktok color="#fff" size={18} />
+                  </a>
+                  <a href="https://www.youtube.com/@refugiolifestyle">
+                    <SiSpotify color="#fff" size={18} />
+                  </a>
+                  <a href="https://open.spotify.com/show/2YJ3HxRyWu6e36K5f29j20">
+                    <SiYoutube color="#fff" size={18} />
+                  </a>
+                </div>
+              </div>
               <p className="text-justify text-white font-thin">
                 Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino.
               </p>
