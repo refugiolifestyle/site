@@ -10,6 +10,16 @@ type EventoProps = {
     }
 }
 
+export async function generateMetadata({ params }: EventoProps) {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${params.id}`)
+    const { evento } = await response.json() as { evento: EventoType }
+
+    return {
+        title: `${evento.titulo} :: Refúgio Lifestyle`,
+        description: "Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino."
+    }
+}
+
 export default async function Evento({ params }: EventoProps) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${params.id}`)
     const { evento } = await response.json() as { evento: EventoType }

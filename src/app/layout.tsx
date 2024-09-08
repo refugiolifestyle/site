@@ -14,8 +14,8 @@ import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Eventos :: Refúgio Lifestyle",
-  description: "Eventos da Refúgio Lifestyle"
+  title: "Refúgio Lifestyle",
+  description: "Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino."
 };
 
 type RootLayoutProps = Readonly<{
@@ -31,11 +31,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en">
-      <Head>
-        <meta name="theme-color" content="#1b1b1b" />
-        <meta name="msapplication-navbutton-color" content="#fff" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="#fff" />
-      </Head>
       <body className={cn('antialiased w-full min-h-screen flex', inter.className)}>
         <div className="w-full flex-1 flex flex-col items-start">
           <div className="w-full min-h-screen flex-1 flex flex-col">

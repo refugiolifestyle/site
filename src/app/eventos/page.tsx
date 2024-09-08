@@ -3,6 +3,12 @@ import Image from "next/image";
 import EventoItem from "@/components/evento-item";
 import { EventoType } from "@/types/evento";
 import { Loader2 } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Eventos :: Refúgio Lifestyle",
+  description: "Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino."
+};
 
 export default async function Eventos() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos`)
