@@ -4,6 +4,7 @@ import { EventoType } from "@/types/evento";
 import { Loader2 } from "lucide-react";
 import CadastrarInscrito from "@/components/cadastrar-inscrito";
 import BackgroundMainSection from "@/components/background-main-section";
+import { Metadata } from "next";
 
 type EventoProps = {
     params: {
@@ -17,8 +18,11 @@ export async function generateMetadata({ params }: EventoProps) {
 
     return {
         title: `${evento.titulo} :: Refúgio Lifestyle`,
-        description: "Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino."
-    }
+        description: "Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino.",
+        openGraph: {
+            images: evento.logo
+        }
+    } as Metadata
 }
 
 export default async function Evento({ params }: EventoProps) {
