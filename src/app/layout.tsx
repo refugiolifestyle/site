@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={cn('antialiased w-full min-h-screen flex', inter.className)}>
         <div className="w-full flex-1 flex flex-col items-start">
-          <div className="w-full min-h-screen flex-1 flex flex-col">
+          <div id="main-section" className="w-full min-h-screen flex-1 flex flex-col bg-no-repeat bg-cover bg-center">
             <div className="w-full flex flex-row items-center justify-between p-6 lg:p-8">
               <Image width={144} height={48} priority={true} src="/refugio.png" alt="Logo da Refúgio" />
               <Menu />
