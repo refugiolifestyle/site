@@ -17,8 +17,8 @@ export default function FinalizadoTabsContent({ evento, setInscrito, setTabActiv
                 <div className="flex flex-row space-x-4">
                     <CheckCircle size={42} className="text-green-600" />
                     <div className="flex-1">
-                        <CardTitle>Finalizado</CardTitle>
-                        <CardDescription>Pagamento realizado</CardDescription>
+                        <CardTitle>Pagamento realizado com sucesso</CardTitle>
+                        <CardDescription>Inscrição finalizada</CardDescription>
                     </div>
                 </div>
             </CardHeader>
