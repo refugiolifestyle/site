@@ -56,10 +56,10 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
         setCheckout(data.checkout)
 
         let pagamentoEfetivado = await new Promise<boolean>(async (resolve, reject) => {
-            let looping = true
-            while (looping) {
+            let looping = 1
+            while (looping > 0 && looping <= 100) {
                 await new Promise(r => {
-                    setTimeout(r, 4000)
+                    setTimeout(r, 5000)
                 })
 
                 try {
@@ -70,25 +70,32 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
 
                     const { status } = await responseVP.json() as { status: string }
 
-                    looping = status !== 'CONCLUIDA'
+                    looping = status !== 'CONCLUIDA' ? looping + 1 : 0
                 }
                 catch (e) {
-                    looping = false
+                    looping = -1
                     alert("Falha ao observar o status de pagamento, tente novamente mais tarde.")
                     reject()
                 }
             }
 
-            resolve(true)
+            if (looping === 0) {
+                resolve(true)
+            } else {
+                alert("Tempo de aguarde do pagamento ultrapassou 5m, tente verificar o status do pagamento mais tarde.")
+                resolve(false)
+            }
         })
 
         if (pagamentoEfetivado) {
             setCheckout(undefined)
             setTabActive("finalizado")
             return true
+        } else {
+            setCheckout(undefined)
+            setTabActive("formulario")
+            return false
         }
-
-        return false
     }
 
     return <TabsContent value="pagamento">
