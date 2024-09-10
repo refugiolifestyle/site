@@ -1,7 +1,8 @@
 import {
     Dialog,
     DialogClose,
-    DialogContent
+    DialogContent,
+    DialogTitle
 } from "@/components/ui/dialog";
 
 export function PagamentoModal({ url }: { url?: string }) {
@@ -12,7 +13,8 @@ export function PagamentoModal({ url }: { url?: string }) {
             onInteractOutside={(e) => {
                 e.preventDefault();
             }}>
-            <iframe src={url} className="w-full h-full rounded"></iframe>
+            <DialogTitle className="hidden">Pagamento</DialogTitle>
+            <iframe src={url} className="w-full h-full rounded" allow="clipboard-read; clipboard-write"></iframe>
         </DialogContent>
     </Dialog>
 }
