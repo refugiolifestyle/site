@@ -44,7 +44,7 @@ export default function ValidacaoFormularioCadastro({ evento, setInscrito, setTa
 
             if (inscrito && !inscrito.novo) {
                 setInscrito(inscrito)
-                if (inscrito.pagamento && inscrito.pagamento.status === 'paid') {
+                if (inscrito.pagamento && inscrito.pagamento.status === 'CONCLUIDA') {
                     setTabActive("finalizado")
                 } else {
                     setTabActive("pagamento")
