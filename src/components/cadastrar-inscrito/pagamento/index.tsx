@@ -92,8 +92,7 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
             setTabActive("finalizado")
             return true
         } else {
-            setCheckout(undefined)
-            setTabActive("formulario")
+            voltarInicio()
             return false
         }
     }
