@@ -57,7 +57,7 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
 
         let pagamentoEfetivado = await new Promise<boolean>(async (resolve, reject) => {
             let looping = 1
-            while (looping > 0 && looping <= 100) {
+            while (looping > 0 && looping <= 60) {
                 await new Promise(r => {
                     setTimeout(r, 5000)
                 })
