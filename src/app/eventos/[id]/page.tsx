@@ -13,6 +13,7 @@ type EventoProps = {
 }
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function generateMetadata({ params }: EventoProps) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${params.id}`)

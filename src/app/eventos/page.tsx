@@ -6,6 +6,7 @@ import { Loader2 } from "lucide-react";
 import { Metadata } from "next";
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export const metadata: Metadata = {
   title: "Eventos :: Refúgio Lifestyle",

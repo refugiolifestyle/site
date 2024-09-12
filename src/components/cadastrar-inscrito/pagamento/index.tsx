@@ -70,7 +70,7 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
 
                     const { status } = await responseVP.json() as { status: string }
 
-                    looping = status !== 'CONCLUIDA' ? looping + 1 : 0
+                    looping = !['CONCLUIDA', 'paid'].includes(status) ? looping + 1 : 0
                 }
                 catch (e) {
                     looping = -1
