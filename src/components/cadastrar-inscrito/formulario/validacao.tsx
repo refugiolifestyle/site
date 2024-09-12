@@ -25,10 +25,10 @@ const FormSchema = z
         cpf: z
             .string({
                 required_error: "CPF obrigatório",
-                invalid_type_error: "CPF inválido (digite somente números)"
+                invalid_type_error: "CPF inválido (digite somente os 11 números)"
             })
-            .length(11, "O CPF precisa conter 11 digitos")
-            .refine(data => cpfValidation.isValid(data), "CPF inválido (digite somente números)"),
+            .length(11, "CPF inválido (digite somente os 11 números)")
+            .refine(data => cpfValidation.isValid(data), "CPF inválido (digite somente os 11 números)"),
     })
 
 export default function ValidacaoFormularioCadastro({ evento, setInscrito, setTabActive }: CadastrarInscritoContentProps) {
