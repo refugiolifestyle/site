@@ -12,6 +12,8 @@ type EventoProps = {
     }
 }
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata({ params }: EventoProps) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${params.id}`)
     const { evento } = await response.json() as { evento: EventoType }

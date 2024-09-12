@@ -92,6 +92,7 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
             setTabActive("finalizado")
             return true
         } else {
+            setCheckout(undefined)
             voltarInicio()
             return false
         }
@@ -120,22 +121,28 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
                                             disabled={form.formState.isSubmitting}
                                             className="flex flex-col space-y-1"
                                         >
-                                            <FormItem>
-                                                <FormLabel className={`font-normal flex items-center space-x-3 space-y-0`}>
-                                                    <FormControl>
-                                                        <RadioGroupItem value="pix" />
-                                                    </FormControl>
-                                                    <span>PIX</span>
-                                                </FormLabel>
-                                            </FormItem>
-                                            {/* <FormItem>
-                                                <FormLabel className={`font-normal flex items-center space-x-3 space-y-0`}>
-                                                    <FormControl>
-                                                        <RadioGroupItem value="credit_card" />
-                                                    </FormControl>
-                                                    <span>Cartão de crédito</span>
-                                                </FormLabel>
-                                            </FormItem> */}
+                                            {
+                                                evento.tiposPagamentos?.includes("pix")
+                                                && <FormItem>
+                                                    <FormLabel className={`font-normal flex items-center space-x-3 space-y-0`}>
+                                                        <FormControl>
+                                                            <RadioGroupItem value="pix" />
+                                                        </FormControl>
+                                                        <span>PIX</span>
+                                                    </FormLabel>
+                                                </FormItem>
+                                            }
+                                            {
+                                                evento.tiposPagamentos?.includes("credit_card")
+                                                && <FormItem>
+                                                    <FormLabel className={`font-normal flex items-center space-x-3 space-y-0`}>
+                                                        <FormControl>
+                                                            <RadioGroupItem value="credit_card" />
+                                                        </FormControl>
+                                                        <span>Cartão de crédito</span>
+                                                    </FormLabel>
+                                                </FormItem>
+                                            }
                                         </RadioGroup>
                                     </FormControl>
                                     <FormMessage />

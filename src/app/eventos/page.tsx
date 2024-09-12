@@ -5,6 +5,8 @@ import { EventoType } from "@/types/evento";
 import { Loader2 } from "lucide-react";
 import { Metadata } from "next";
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: "Eventos :: Refúgio Lifestyle",
   description: "Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino."
