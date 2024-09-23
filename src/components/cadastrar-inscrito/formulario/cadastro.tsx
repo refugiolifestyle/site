@@ -117,6 +117,11 @@ export default function CadastroFormularioCadastro({ evento, setTabActive, setIn
             if (name === "rede" && type === "change") {
                 form.setValue("celula", "", { shouldValidate: true })
             }
+
+            if (name === "visitante" && type === "change") {
+                form.setValue("rede", "", { shouldValidate: true })
+                form.setValue("celula", "", { shouldValidate: true })
+            }
         })
 
         return () => subscription.unsubscribe()
