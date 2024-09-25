@@ -157,8 +157,10 @@ export default function PagamentoTabsContent({ evento, setTabActive, inscrito, v
                                     <FormLabel className="text-lg">Termos de compromisso</FormLabel>
                                     <ul className="list-decimal text-sm text-justify px-6 lg:px-4 space-y-2 overflow-y-scroll h-48">
                                         <li>Estou ciente que os dados informados estão corretos e atualizados</li>
-                                        <li>Uma vez entregue a pulseira, esta é de inteira responsabilidade do inscrito, se eximindo a organização do evento de qualquer responsabilidade de entregar-lhe uma nova pulseira em quaisquer hipóteses de perda, extravio etc, ainda que se trate de ocorrência de caso fortuito ou de força maior</li>
                                         <li>⁠Todos os preletores e cantores estão confirmados mediante contrato, todavia, deve estar ciente o adquirente que há situações de caso fortuito ou força maior que fogem por completo da responsabilização da organizadora, não havendo hipótese de devolução do dinheiro ou parte dele no caso de algum dos preletores não poder comparecer ao evento</li>
+                                        <li>Uma vez entregue a pulseira, esta é de inteira responsabilidade do inscrito, se eximindo a organização do evento de qualquer responsabilidade de entregar-lhe uma nova pulseira em quaisquer hipóteses de perda, extravio etc, ainda que se trate de ocorrência de caso fortuito ou de força maior</li>
+                                        <li>Uma vez que a pulseira está vinculada ao cpf do adquirente, não há qualquer hipótese de transferência para outrem</li>
+                                        <li>Por não estarmos diante de relação de consumo, a organizadora do evento não tem quaisquer obrigações legais de restituir o valor da pulseira, ainda que se esteja diante de situação de caso fortuito ou de força maior</li>
                                     </ul>
                                     <div className="space-x-2 flex items-center pt-2">
                                         <FormControl>
