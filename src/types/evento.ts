@@ -5,7 +5,8 @@ export type EventoType = {
     titulo: string
     ativo: boolean
     logo: string
-    chamada: string
+    chamada: string | null
+    flyer: string | null
     fundo: string
     valor: number
     limitePagamentos?: string

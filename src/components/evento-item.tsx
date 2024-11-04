@@ -23,15 +23,21 @@ export default function EventoItem({ evento }: EventoItemProps) {
     }, [])
 
     return <div className="evento">
-        <video
-            playsInline={true}
-            loop={true}
-            muted={muted}
-            autoPlay={true}
-            controls={false}
-            className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-25 pointer-events-none">
-            <source src={evento.chamada} type="video/mp4" />
-        </video>
+        {
+            evento.chamada
+                ? <video
+                    playsInline={true}
+                    loop={true}
+                    muted={muted}
+                    autoPlay={true}
+                    controls={false}
+                    className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen brightness-25 pointer-events-none">
+                    <source src={evento.chamada} type="video/mp4" />
+                </video>
+                : <img
+                    src={evento.fundo}
+                    className="absolute bottom-0 left-0 top-0 right-0 object-cover z-[-1] w-full h-screen pointer-events-none" />
+        }
         <div
             onClick={() => setMuted(o => !o)}
             className="absolute bottom-4 right-4 cursor-pointer border rounded-full p-2 flex justify-center items-center">
