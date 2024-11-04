@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: EventoProps) {
         title: `${evento.titulo} :: Refúgio Lifestyle`,
         description: "Somos uma rede de células pertencente a Igreja do Evangelho Quadrangular - Sede do Pará, que funciona de modo orgânico e relacional, objetivando despertar cada crente a fim de que possa desenvolver suas habilidades ministeriais e funcionar dentro do Reino.",
         openGraph: {
-            images: evento.logo
+            images: evento.flyer
         }
     } as Metadata
 }
