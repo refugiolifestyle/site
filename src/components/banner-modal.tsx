@@ -16,15 +16,19 @@ export default function BannerModal() {
   }, [])
 
   return <Dialog open={banner != null} onOpenChange={open => !open && setBanner(null)} modal={true}>
-      <DialogContent className="w-full max-w-[1000px] aspect-video rounded border-none">
-        <Link href="/eventos">
-          <Image
-            fill
-            priority={true}
-            src="/banner.jpeg"
-            alt="Promo festa da colheita"
-            className="rounded" />
-        </Link>
-      </DialogContent>
-    </Dialog>
+    <DialogContent className="w-full max-w-[1000px] aspect-video rounded border-none">
+      {
+        banner
+          ? <Link href={banner?.link}>
+            <Image
+              fill
+              priority={true}
+              src={banner?.imagem}
+              alt={`Banner inicial`}
+              className="rounded" />
+          </Link>
+          : null
+      }
+    </DialogContent>
+  </Dialog>
 }
