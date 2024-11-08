@@ -23,7 +23,7 @@ type RootLayoutProps = Readonly<{
 }>
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/galeria`, {
+  let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/galeria`, {
     cache: 'force-cache'
   })
 

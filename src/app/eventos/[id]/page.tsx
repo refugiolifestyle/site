@@ -16,7 +16,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export async function generateMetadata({ params }: EventoProps) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${params.id}`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${params.id}`)
     const { evento } = await response.json() as { evento: EventoType }
 
     return {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: EventoProps) {
 }
 
 export default async function Evento({ params }: EventoProps) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${params.id}`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${params.id}`)
     const { evento } = await response.json() as { evento: EventoType }
 
     return <div className="flex flex-col md:flex-row justify-around items-center space-y-20 md:space-y-0 space-x-0 md:space-x-20 w-full">
