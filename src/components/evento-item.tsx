@@ -15,7 +15,7 @@ export default function EventoItem({ evento }: EventoItemProps) {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/eventos/${evento.id}/inscricoesAbertas`)
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${evento.id}/inscricoesAbertas`)
             const data = await response.json() as { inscricoesAbertas: boolean }
 
             setInscricoesAbertas(data.inscricoesAbertas)
