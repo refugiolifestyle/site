@@ -10,6 +10,7 @@ import FooterGallery from "@/components/footer-gallery";
 import Menu from "@/components/menu";
 import Image from "next/image";
 import Head from "next/head";
+import BannerModal from "@/components/banner-modal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               </div>
               <div className="flex-1 flex flex-col justify-center items-start py-4">
                 {children}
+                <BannerModal />
               </div>
             </div>
           </div>
