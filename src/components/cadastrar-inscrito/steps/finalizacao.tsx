@@ -22,7 +22,7 @@ export default function Finalizacao({ inscrito, reset, evento }: StepProps) {
             </div>
         </CardHeader>
         <CardContent className="space-y-4 text-justify">
-            <p>Olá <b>{inscrito?.nome?.split(' ').shift()}</b>, seu pagamento foi processado com sucesso, a cada dia que passa estamos mais ansiosos para viver tudo o que Deus tem preparado para o <b>Retiro Convergir 2025</b>.</p>
+            <p>Olá <b>{inscrito?.nome?.split(' ').shift()}</b>, seu pagamento foi processado com sucesso, a cada dia que passa estamos mais ansiosos para viver tudo o que Deus tem preparado para <b>{evento.titulo}</b>.</p>
             <p>Aguarde o direcionamento da sua liderança para os próximos passos.</p>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
