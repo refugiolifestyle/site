@@ -13,7 +13,7 @@ export type InscritoType = {
   pagamento?: Pagamento
   finalizada?: boolean
   inscritoEm?: string
-  pagamentos?: Pagamento[]
+  pagamentos?: {[txid: string]: Pagamento}
   pagamentosAFazer?: EventoPagamentosType[]
   termos?: EventoTermoType[]
 }

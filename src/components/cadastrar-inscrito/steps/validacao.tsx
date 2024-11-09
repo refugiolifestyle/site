@@ -9,12 +9,13 @@ import {
 } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { InscritoType } from "@/types/inscrito"
+import { InscritoType, Pagamento } from "@/types/inscrito"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { cpf as cpfValidation } from 'cpf-cnpj-validator'
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { StepProps, Steps } from ".."
+import { EventoPagamentosType } from "@/types/evento"
 
 const FormSchema = z
     .object({
@@ -34,7 +35,6 @@ export default function Validacao({ setStep, evento, setInscrito }: StepProps) {
     })
 
     async function onSubmit({ cpf }: z.infer<typeof FormSchema>) {
-
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${evento.id}/inscricoes/${cpf}`)
             const { inscrito } = await response.json() as { inscrito: InscritoType }
@@ -43,7 +43,7 @@ export default function Validacao({ setStep, evento, setInscrito }: StepProps) {
 
             if (inscrito?.novo) {
                 setStep(Steps.FORMULARIO)
-            } else if (inscrito?.finalizada) {
+            } else if (Object.values(inscrito?.pagamentos!).some(pagamento => ["CONCLUIDA", "paid"].includes(pagamento.status!))) {
                 setStep(Steps.FINALIZACAO)
             } else {
                 setStep(Steps.TERMOS)
