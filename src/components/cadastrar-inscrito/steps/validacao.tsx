@@ -43,10 +43,13 @@ export default function Validacao({ setStep, evento, setInscrito }: StepProps) {
 
             if (inscrito?.novo) {
                 setStep(Steps.FORMULARIO)
-            } else if (Object.values(inscrito?.pagamentos!).some(pagamento => ["CONCLUIDA", "paid"].includes(pagamento.status!))) {
-                setStep(Steps.FINALIZACAO)
             } else {
-                setStep(Steps.TERMOS)
+                let pagamentos = Object.values(inscrito.pagamentos || {})
+                if (pagamentos.length && pagamentos.some(pagamento => ["CONCLUIDA", "paid"].includes(pagamento.status!))) {
+                    setStep(Steps.FINALIZACAO)
+                } else {
+                    setStep(Steps.TERMOS)
+                }
             }
 
             return true
