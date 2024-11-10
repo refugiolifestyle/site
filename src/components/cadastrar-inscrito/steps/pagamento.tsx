@@ -7,7 +7,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Check } from "lucide-react"
 import { useState } from "react"
 import { StepProps, Steps } from ".."
 import { PagamentoModal } from "../pagamento-modal"
@@ -103,46 +102,43 @@ export default function Pagamentos({ setStep, setInscrito, inscrito, reset, even
                 <CardTitle>Pagamento</CardTitle>
                 <CardDescription>Selecione a forma de pagamento que deseja utilizar</CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col space-y-4">
-                <div className="grid gap-2 grid-cols-1">
-                    {
-                        evento.tiposPagamentos?.includes("pix")
-                        && <Button
-                            variant={"ghost"}
-                            onClick={() => setMeioPagamento("pix")}
-                            className={`border w-full h-full max-h-[80px] flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "pix" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
-                            <h1 className="text-left text-lg font-semibold">Pix</h1>
-                            <ul className="text-left text-xs font-light">
-                                <li><b>Total:</b> {pagamentoTotaisPix?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
-                            </ul>
-                        </Button>
-                    }
-                    {
-                        evento.tiposPagamentos?.includes("credit_card")
-                        && <Button
-                            variant={"ghost"}
-                            onClick={() => setMeioPagamento("credit_card")}
-                            className={`border w-full h-full max-h-[80px] flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "credit_card" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
-                            <h1 className="text-left text-lg font-semibold">Cartão de crédito</h1>
-                            <ul className="text-left text-xs font-light">
-                                <li><b>Total:</b> {pagamentoTotaisCartao?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
-                            </ul>
-                        </Button>
-                    }
-
-                    {
-                        evento.tiposPagamentos?.includes("money")
-                        && <Button
-                            variant={"ghost"}
-                            onClick={() => setMeioPagamento("money")}
-                            className={`border w-full h-full max-h-[80px] flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "money" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
-                            <h1 className="text-left text-lg font-semibold">Dinheiro</h1>
-                            <ul className="text-left text-xs font-light">
-                                <li><b>Total:</b> {pagamentoTotaisMoney?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
-                            </ul>
-                        </Button>
-                    }
-                </div>
+            <CardContent className="flex flex-col space-y-2">
+                {
+                    evento.tiposPagamentos?.includes("pix")
+                    && <Button
+                        variant={"ghost"}
+                        onClick={() => setMeioPagamento("pix")}
+                        className={`border w-full h-full max-h-[80px] flex flex-col justify-between items-start px-4 py-2 space-y-2 ${meioPagamento === "pix" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
+                        <h1 className="text-left text-lg font-semibold">Pix</h1>
+                        <ul className="text-left text-xs font-light">
+                            <li><b>Total:</b> {pagamentoTotaisPix?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
+                        </ul>
+                    </Button>
+                }
+                {
+                    evento.tiposPagamentos?.includes("credit_card")
+                    && <Button
+                        variant={"ghost"}
+                        onClick={() => setMeioPagamento("credit_card")}
+                        className={`border w-full h-full max-h-[80px] flex flex-col justify-between items-start px-4 py-2 space-y-2 ${meioPagamento === "credit_card" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
+                        <h1 className="text-left text-lg font-semibold">Cartão de crédito</h1>
+                        <ul className="text-left text-xs font-light">
+                            <li><b>Total:</b> {pagamentoTotaisCartao?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
+                        </ul>
+                    </Button>
+                }
+                {
+                    evento.tiposPagamentos?.includes("money")
+                    && <Button
+                        variant={"ghost"}
+                        onClick={() => setMeioPagamento("money")}
+                        className={`border w-full h-full max-h-[80px] flex flex-col justify-between items-start px-4 py-2 space-y-2 ${meioPagamento === "money" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
+                        <h1 className="text-left text-lg font-semibold">Dinheiro</h1>
+                        <ul className="text-left text-xs font-light">
+                            <li><b>Total:</b> {pagamentoTotaisMoney?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
+                        </ul>
+                    </Button>
+                }
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
                 {
