@@ -110,7 +110,7 @@ export default function Pagamentos({ setStep, setInscrito, inscrito, reset, even
                         && <Button
                             variant={"ghost"}
                             onClick={() => setMeioPagamento("pix")}
-                            className={`border w-full h-full flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "pix" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
+                            className={`border w-full h-full max-h-[80px] flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "pix" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
                             <h1 className="text-left text-lg font-semibold">Pix</h1>
                             <ul className="text-left text-xs font-light">
                                 <li><b>Total:</b> {pagamentoTotaisPix?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
@@ -122,7 +122,7 @@ export default function Pagamentos({ setStep, setInscrito, inscrito, reset, even
                         && <Button
                             variant={"ghost"}
                             onClick={() => setMeioPagamento("credit_card")}
-                            className={`border w-full h-full flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "credit_card" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
+                            className={`border w-full h-full max-h-[80px] flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "credit_card" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
                             <h1 className="text-left text-lg font-semibold">Cartão de crédito</h1>
                             <ul className="text-left text-xs font-light">
                                 <li><b>Total:</b> {pagamentoTotaisCartao?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
@@ -135,7 +135,7 @@ export default function Pagamentos({ setStep, setInscrito, inscrito, reset, even
                         && <Button
                             variant={"ghost"}
                             onClick={() => setMeioPagamento("money")}
-                            className={`border w-full h-full flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "money" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
+                            className={`border w-full h-full max-h-[80px] flex flex-col justify-start items-start px-4 py-2 space-y-2 ${meioPagamento === "money" ? 'bg-muted border border-[#fdaf00]' : ''}`}>
                             <h1 className="text-left text-lg font-semibold">Dinheiro</h1>
                             <ul className="text-left text-xs font-light">
                                 <li><b>Total:</b> {pagamentoTotaisMoney?.toLocaleString('pt-BR', { currency: "BRL", style: "currency" })}</li>
