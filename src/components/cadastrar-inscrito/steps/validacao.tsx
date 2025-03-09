@@ -66,7 +66,7 @@ export default function Validacao({ setStep, evento, setInscrito }: StepProps) {
                 <CardHeader>
                     <CardTitle className="text-2xl">Formulário</CardTitle>
                     <CardDescription>
-                        Digite seu CPF para validar seu cadastro.
+                        Digite o <b>CPF do Esposo</b> para validar seu cadastro.
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4">
