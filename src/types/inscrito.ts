@@ -2,6 +2,10 @@ import { EventoPagamentosType, EventoTermoType } from "./evento"
 
 export type InscritoType = {
   id?: string
+  cpf: string
+  nome?: string
+  telefone?: string
+  email?: string
   rede?: string
   celula?: string
   esposo?: string
