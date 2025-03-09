@@ -12,6 +12,7 @@ export type InscritoType = {
   esposa?: string
   telefoneEsposo?: string
   telefoneEsposa?: string
+  dataCasamento?: string
   novo?: boolean
   inscricao?: string
   pagamento?: Pagamento
