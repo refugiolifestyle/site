@@ -20,28 +20,10 @@ import { CelulaType } from "@/types/celulas"
 import { InscritoType } from "@/types/inscrito"
 import { StepProps, Steps } from ".."
 import { Checkbox } from "@/components/ui/checkbox"
+import crypto from 'crypto'
 
 const FormSchema = z
     .object({
-        cpf: z
-            .string({
-                required_error: "O Campo CPF é obrigatório",
-                invalid_type_error: "CPF inválido (digite somente números)"
-            })
-            .length(11, "O CPF precisa conter 11 digitos")
-            .refine(data => cpfValidation.isValid(data), "CPF inválido (digite somente números)"),
-        nome: z
-            .string({ required_error: "O Campo Nome é obrigatório" })
-            .min(10, { message: "Campo precisa ter no mínimo 10 caracteres" }),
-        telefone: z
-            .string({ required_error: "O Campo Telefone é obrigatório" })
-            .min(10, { message: "Campo precisa ter no mínimo 10 digitos" })
-            .max(11, { message: "Campo precisa ter no máximo 11 digitos" }),
-        email: z
-            .string({
-                required_error: "O Campo Email é obrigatório",
-            })
-            .email("O Campo Email é obrigatório"),
         rede: z
             .string({
                 required_error: "O Campo Rede é obrigatório"
@@ -50,6 +32,27 @@ const FormSchema = z
             .string({
                 required_error: "O Campo Célula é obrigatório"
             }),
+        cpf: z
+            .string({
+                required_error: "O Campo CPF é obrigatório",
+                invalid_type_error: "CPF inválido (digite somente números)"
+            })
+            .length(11, "O CPF precisa conter 11 digitos")
+            .refine(data => cpfValidation.isValid(data), "CPF inválido (digite somente números)"),
+        esposo: z
+            .string({ required_error: "O Campo Esposo é obrigatório" })
+            .min(10, { message: "Campo precisa ter no mínimo 10 caracteres" }),
+        telefoneEsposo: z
+            .string({ required_error: "O Campo Telefone do Esposo é obrigatório" })
+            .min(10, { message: "Campo precisa ter no mínimo 10 digitos" })
+            .max(11, { message: "Campo precisa ter no máximo 11 digitos" }),
+        esposa: z
+            .string({ required_error: "O Campo Esposa é obrigatório" })
+            .min(10, { message: "Campo precisa ter no mínimo 10 caracteres" }),
+        telefoneEsposa: z
+            .string({ required_error: "O Campo Telefone da Esposq é obrigatório" })
+            .min(10, { message: "Campo precisa ter no mínimo 10 digitos" })
+            .max(11, { message: "Campo precisa ter no máximo 11 digitos" }),
         visitante: z
             .boolean()
             .default(false)
@@ -77,12 +80,13 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            cpf: "",
-            celula: "",
-            nome: "",
             rede: "",
-            email: "",
-            telefone: "",
+            celula: "",
+            cpf: "",
+            esposa: "",
+            esposo: "",
+            telefoneEsposa: "",
+            telefoneEsposo: "",
             visitante: false,
             ...inscrito
         }
@@ -116,8 +120,10 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
         try {
             const payload: InscritoType = {
                 ...data,
+                id: data.cpf,
                 inscritoEm: new Date().toString(),
-                nome: data.nome.toLowerCase().replace(/(^.|\s+.)/g, m => m.toUpperCase())
+                esposo: data.esposo.toLowerCase().replace(/(^.|\s+.)/g, m => m.toUpperCase()),
+                esposa: data.esposa.toLowerCase().replace(/(^.|\s+.)/g, m => m.toUpperCase())
             }
 
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${evento.id}/inscricoes`, {
@@ -130,8 +136,11 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
                 throw message
             }
 
-            setInscrito(payload)
-            setStep(Steps.TERMOS)
+            setInscrito({
+                ...payload,
+                pagamentosAFazer: evento.pagamentos
+            })
+            setStep(Steps.PAGAMENTO)
         } catch (e: any) {
             alert(e)
             console.error(e)
@@ -166,7 +175,7 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder="CPF" {...field} />
+                                        <Input placeholder="Digite o CPF do Esposo" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -174,11 +183,11 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
                         />
                         <FormField
                             control={form.control}
-                            name="nome"
+                            name="esposo"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder="Digite seu nome completo" {...field} />
+                                        <Input placeholder="Digite o nome completo do Esposo" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -186,11 +195,11 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
                         />
                         <FormField
                             control={form.control}
-                            name="telefone"
+                            name="telefoneEsposo"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder="Digite seu telefone, DDD + Número" {...field} />
+                                        <Input placeholder="Digite o telefone do Esposo, DDD + Número" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -198,11 +207,23 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
                         />
                         <FormField
                             control={form.control}
-                            name="email"
+                            name="esposa"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder="Digite seu email" type="email" {...field} />
+                                        <Input placeholder="Digite o nome completo da Esposa" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="telefoneEsposa"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Input placeholder="Digite o telefone da Esposa, DDD + Número" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -281,7 +302,7 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
                         Avançar
                     </Button>
                     <a href="#" className="text-sm" onClick={reset}>
-                        Voltar
+                    Voltar
                     </a>
                 </CardFooter>
             </Card>

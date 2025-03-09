@@ -55,7 +55,6 @@ export default function CadastrarInscrito({ evento }: CadastrarInscritoProps) {
     })
     
     const file = new File([jpeg], `${evento.titulo} - Confirmação.jpg`, {type: 'image/jpeg'});
-    console.log(jpeg, file)
 
     const data = {
       files: [file!],

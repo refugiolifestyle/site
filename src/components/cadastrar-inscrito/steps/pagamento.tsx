@@ -21,7 +21,7 @@ export default function Pagamentos({ setStep, setInscrito, inscrito, reset, even
         setLoading(true)
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${evento.id}/inscricoes/${inscrito?.cpf}/pagamento/${meioPagamento}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${evento.id}/inscricoes/${inscrito?.id}/pagamento/${meioPagamento}`, {
                 method: 'POST',
                 body: JSON.stringify(inscrito?.pagamentosAFazer)
             })
@@ -48,7 +48,7 @@ export default function Pagamentos({ setStep, setInscrito, inscrito, reset, even
                         })
 
                         try {
-                            const responseVP = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${evento.id}/inscricoes/${inscrito?.cpf}/pagamento/${data.txid}/status`, { cache: "no-cache" })
+                            const responseVP = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${evento.id}/inscricoes/${inscrito?.id}/pagamento/${data.txid}/status`, { cache: "no-cache" })
                             if (!responseVP.ok) {
                                 throw new Error()
                             }
@@ -151,9 +151,6 @@ export default function Pagamentos({ setStep, setInscrito, inscrito, reset, even
                             Pagar
                         </Button>
                 }
-                <a href="#" className="text-sm" onClick={() => setStep(s => evento.pagamentos.length > 1 ? s - 1 : s - 2)}>
-                    Voltar
-                </a>
             </CardFooter>
         </Card>
     </>
