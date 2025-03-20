@@ -2,13 +2,17 @@
 
 import { useEffect } from "react";
 
-export default function BackgroundMainSection({ url }: { url: string }) {
+export default function BackgroundMainSection({ url, additionalStyle }: { url: string, additionalStyle?: Partial<CSSStyleDeclaration> }) {
     useEffect(() => {
         const element = document.getElementById('main-section')
-        const style = element?.style
-        
+        let style = element?.style
+
         if (style) {
             style.backgroundImage = `url(${url})`
+
+            if (additionalStyle) {
+                style = Object.assign(style, additionalStyle)
+            }
         }
     }, [])
 

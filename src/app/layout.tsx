@@ -61,7 +61,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             </div>
           </div>
           <div className="w-full flex flex-col bg-[#1b1b1b]">
-            <div className="w-full flex flex-col md:flex-row p-6 lg:px-16 lg:py-10 gap-8 lg:gap-20">
+            <div className="w-full flex flex-col md:flex-row p-6 lg:px-16 lg:py-10 gap-6 lg:gap-20">
               <div className="flex flex-1 flex-col gap-6 text-center">
                 <div className="flex flex-row justify-between">
                   <Image
@@ -101,11 +101,17 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                     Tv. Timbó, 1244, Pedreira, Belém - PA, Brasil
                   </a>
                 </div>
+                <h4 className="text-white text-2xl font-thin">Link</h4>
+                <div className='flex gap-6'>
+                  <a className='text-white' href="/politicas-de-privacidade">
+                    Políticas de Privacidade
+                  </a>
+                </div>
               </div>
             </div>
             <p className="text-gray-400 font-light py-4 px-6 lg:px-16 gap-8 lg:gap-20 text-left">
-                © Refúgio Lifestyle. Todos os direitos reservados.
-              </p>
+              © Refúgio Lifestyle. Todos os direitos reservados.
+            </p>
           </div>
         </div>
       </body>
