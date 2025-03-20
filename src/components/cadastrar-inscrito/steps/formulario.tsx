@@ -53,6 +53,9 @@ const FormSchema = z
             .string({ required_error: "O Campo Telefone da Esposq é obrigatório" })
             .min(10, { message: "Campo precisa ter no mínimo 10 digitos" })
             .max(11, { message: "Campo precisa ter no máximo 11 digitos" }),
+        dataCasamento: z
+            .string({ required_error: "O Campo Data de casamento é obrigatório" })
+            .regex(/\d{2}\/\d{2}\/\d{4}/, {message:"O Campo Data de casamento precisa ser no formato DD/MM/AAAA"}),
         visitante: z
             .boolean()
             .default(false)
@@ -87,6 +90,7 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
             esposo: "",
             telefoneEsposa: "",
             telefoneEsposo: "",
+            dataCasamento: "",
             visitante: false,
             ...inscrito
         }
@@ -224,6 +228,18 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
                                 <FormItem>
                                     <FormControl>
                                         <Input placeholder="Digite o telefone da Esposa, DDD + Número" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="dataCasamento"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Input placeholder="Digite a data de casamento do casal" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
