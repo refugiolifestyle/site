@@ -48,6 +48,7 @@ export function PagamentoMoneyModal({ onSubmit, loading, evento }: { evento: Eve
                         <div className="grid gap-6 my-4">
                             {
                                 evento.temPromocaoTermos?.map(termo => <FormField
+                                    key={termo.termo}
                                     control={form.control}
                                     name={`termo_${termo.termo}`}
                                     render={({ field }) => (
@@ -57,7 +58,7 @@ export function PagamentoMoneyModal({ onSubmit, loading, evento }: { evento: Eve
                                                     checked={field.value}
                                                     onCheckedChange={field.onChange}
                                                 />
-    
+
                                             </FormControl>
                                             <FormLabel className="leading-5 text-justify" dangerouslySetInnerHTML={{ __html: termo.descricao }}></FormLabel>
                                         </FormItem>
