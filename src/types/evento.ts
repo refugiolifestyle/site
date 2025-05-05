@@ -18,6 +18,9 @@ export type EventoType = {
     meta?: number
     metaBatida?: Object
     termos: EventoTermoType[]
+    temPromocao?: boolean
+    temPromocaoMeiosPagamentos?: string
+    temPromocaoTermos?: EventoTermoType[]
 }
 
 export type EventoTermoType = {

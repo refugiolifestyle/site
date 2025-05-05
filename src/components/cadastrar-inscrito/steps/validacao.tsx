@@ -22,10 +22,10 @@ const FormSchema = z
         cpf: z
             .string({
                 required_error: "CPF obrigatório",
-                invalid_type_error: "CPF inválido (digite somente os 11 números)"
+                invalid_type_error: "CPF inválido"
             })
-            .length(11, "CPF inválido (digite somente os 11 números)")
-            .refine(data => cpfValidation.isValid(data), "CPF inválido (digite somente os 11 números)"),
+            .transform(data => data.replaceAll(/[^\d]+/g, ''))
+            .refine(data => cpfValidation.isValid(data), "CPF inválido"),
     })
 
 export default function Validacao({ setStep, evento, setInscrito }: StepProps) {
@@ -75,7 +75,7 @@ export default function Validacao({ setStep, evento, setInscrito }: StepProps) {
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <Input placeholder="CPF (somente os números)" {...field} />
+                                    <Input placeholder="CPF" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

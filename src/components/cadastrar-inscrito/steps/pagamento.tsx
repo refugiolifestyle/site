@@ -142,8 +142,8 @@ export default function Pagamentos({ setStep, setInscrito, inscrito, reset, even
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
                 {
-                    meioPagamento === "money"
-                        ? <PagamentoMoneyModal loading={loading} onSubmit={onSubmit} />
+                    evento.temPromocao && evento.temPromocaoMeiosPagamentos?.includes(meioPagamento)
+                        ? <PagamentoMoneyModal loading={loading} onSubmit={onSubmit} evento={evento} />
                         : <Button
                             disabled={loading}
                             onClick={onSubmit}
