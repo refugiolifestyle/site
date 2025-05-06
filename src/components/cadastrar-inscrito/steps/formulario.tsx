@@ -42,6 +42,10 @@ const FormSchema = z
                 required_error: "O Campo Email é obrigatório",
             })
             .email("O Campo Email é obrigatório"),
+        profissao: z
+            .string({
+                required_error: "O Campo Profissão é obrigatório",
+            }),
         rede: z
             .string({
                 required_error: "O Campo Rede é obrigatório"
@@ -83,6 +87,7 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
             rede: "",
             email: "",
             telefone: "",
+            profissao: "",
             visitante: false,
             ...inscrito
         }
@@ -203,6 +208,18 @@ export default function Formulario({ setStep, inscrito, setInscrito, reset, even
                                 <FormItem>
                                     <FormControl>
                                         <Input placeholder="Digite seu email" type="email" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="profissao"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Input placeholder="Digite a sua profissão" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
