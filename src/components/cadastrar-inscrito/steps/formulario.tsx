@@ -42,7 +42,9 @@ const FormSchema = z
                 required_error: "O Campo Email é obrigatório",
             })
             .email("O Campo Email é obrigatório"),
-        profissao: z.string(),
+        profissao: z.string()
+            .min(1, "O Campo Profissão é obrigatório")
+            .transform(profissao => profissao!.toLocaleLowerCase('pt-BR').replace(/(^|\s)\S/g, l => l.toLocaleUpperCase('pt-BR'))),
         rede: z
             .string({
                 required_error: "O Campo Rede é obrigatório"
