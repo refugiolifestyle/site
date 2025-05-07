@@ -42,11 +42,7 @@ const FormSchema = z
                 required_error: "O Campo Email é obrigatório",
             })
             .email("O Campo Email é obrigatório"),
-        profissao: z
-            .string({
-                required_error: "O Campo Profissão é obrigatório",
-            })
-            .refine(data => !!data, "O Campo Profissão é obrigatório"),
+        profissao: z.string(),
         rede: z
             .string({
                 required_error: "O Campo Rede é obrigatório"
