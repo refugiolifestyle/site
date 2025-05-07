@@ -16,7 +16,7 @@ export default function Fechada({ evento }: { evento: EventoType }) {
         try {
             await navigator.share({
                 title: evento.titulo,
-                text: "Compartilhe com sua célula e seus amigos para que todos fiquem atentos às próximas novidades do melhor show do ano! Não perca a oportunidade de garantir seu lugar quando as inscrições abrirem!",
+                text: "Compartilhe com sua célula e seus amigos para que todos fiquem atentos às próximas novidades do melhor evento do ano! Não perca a oportunidade de garantir seu lugar quando as inscrições abrirem!",
                 url: `${process.env.NEXT_PUBLIC_BASE_URL}/eventos/${evento.id}`
             });
         } catch (err: any) {

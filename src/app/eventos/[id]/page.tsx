@@ -32,6 +32,8 @@ export default async function Evento({ params }: EventoProps) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventos/${params.id}`)
     const { evento } = await response.json() as { evento: EventoType }
 
+    evento.inscricoesAbertas = true
+
     return <div className="flex flex-col md:flex-row justify-around items-center space-y-20 md:space-y-0 space-x-0 md:space-x-20 w-full">
         <BackgroundMainSection url={evento.fundo} />
         <Image
